@@ -1,7 +1,7 @@
 // rollup.config.js
 const resolve  = require('@rollup/plugin-node-resolve').default;
 const commonjs = require('@rollup/plugin-commonjs');
-const terser = require('@rollup/plugin-terser').default;
+const terser   = require('@rollup/plugin-terser').default;
 
 module.exports = {
   input: 'src/main.js',
@@ -9,6 +9,7 @@ module.exports = {
     file:   'dist/ToolBox.user.js',
     format: 'iife',
     banner:
+// Notez bien qu'il n'y a **aucun** espace ou tabulation avant les "//"
 `// ==UserScript==
 // @name         ToolBox
 // @namespace    http://tampermonkey.net/
@@ -27,8 +28,8 @@ module.exports = {
 // @run-at       document-idle
 // @require      https://code.jquery.com/jquery-3.6.0.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js
-// @downloadURL  https://raw.githubusercontent.com/VotreCompte/ToolBox/main/dist/ToolBox.user.js
-// @updateURL    https://raw.githubusercontent.com/VotreCompte/ToolBox/main/dist/ToolBox.user.js
+// @downloadURL  https://raw.githubusercontent.com/LeTristoune81/ToolBox/main/dist/ToolBox.user.js
+// @updateURL    https://raw.githubusercontent.com/LeTristoune81/ToolBox/main/dist/ToolBox.user.js
 // ==/UserScript==`
   },
   plugins: [
