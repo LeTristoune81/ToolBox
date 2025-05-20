@@ -9,11 +9,6 @@ module.exports = {
     file:   'dist/ToolBox.user.js',
     format: 'iife',
     banner:
-<<<<<<< HEAD
-// Notez bien qu'il n'y a **aucun** espace ou tabulation avant les "//"
-=======
-// n’y mets **aucune** indentation devant ces lignes :
->>>>>>> b016254 (fix: add metadata banner and dist bundle)
 `// ==UserScript==
 // @name         ToolBox
 // @namespace    http://tampermonkey.net/
