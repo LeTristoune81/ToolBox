@@ -1,1 +1,12 @@
-#toolbox { /* styles... */ }
+/* ─── CSS Toolbox Icons & Text ──────────────────────────────────────────────── */
+#toolbox .contenu_boite_compte_plus ul li a {
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 4px 0;
+}
+#toolbox .contenu_boite_compte_plus ul li a .icon {
+  position: absolute;
+  left: 12px;
+}
