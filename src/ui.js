@@ -80,8 +80,16 @@ function createPanel(asDome, asTdc, placeOn, placeSec, detectOn, detectSec, webh
       </label>
     </div>`).appendTo('body')
     // Synchronise localStorage dès la saisie
-    .find('#as-dome').on('input',    e=>{ localStorage.setItem(K_AS_DOME, +e.target.value); })
-    .end().find('#as-tdc').on('input', e=>{ localStorage.setItem(K_AS_TDC, +e.target.value); })
+        .find('#as-dome').on('input',    e=>{
+        const keyDome = location.host.replace(/[.:]/g,'_') + '_as_dome';
+        const v = parseInt(e.target.value, 10) || 0;
+      localStorage.setItem(keyDome, v);
+   })
+    .end().find('#as-tdc').on('input', e=>{
+        const keyTdc = location.host.replace(/[.:]/g,'_') + '_as_tdc';
+        const v = parseInt(e.target.value, 10) || 0;
+        localStorage.setItem(keyTdc, v);
+    })
     .end().find('#discord-webhook').on('change', e=>{ localStorage.setItem(K_WH, e.target.value); })
     .end().find('#place-on').on('change', e=>{ localStorage.setItem(K_PE, e.target.checked); })
     .end().find('#place-sec').on('input',  e=>{ localStorage.setItem(K_PS, +e.target.value); })
