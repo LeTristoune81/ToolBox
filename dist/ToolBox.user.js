@@ -20,6 +20,4 @@
 // @require      https://raw.githubusercontent.com/LeTristoune81/ToolBox/main/src/colonies.js
 // @require      https://raw.githubusercontent.com/LeTristoune81/ToolBox/main/src/ui.js
 // @require      https://raw.githubusercontent.com/LeTristoune81/ToolBox/main/src/main.js
-+// @resource     colonieCss https://raw.githubusercontent.com/LeTristoune81/ToolBox/main/css/colonie.css
-+// @resource     toolboxCss https://raw.githubusercontent.com/LeTristoune81/ToolBox/main/css/toolbox.css
 // ==/UserScript==
