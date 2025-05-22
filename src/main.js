@@ -25,8 +25,13 @@
   // boucles
   setInterval(()=>{ injectToolbox(); createPanel(); enhanceProfile(); },500);
   setInterval(()=>{
-    const s=new Date().getSeconds();
-    if(placeOn&&s===placeSec)    performReplaceAntisonde(asDome,asTdc);
-    if(detectOn&&s===detectSec)   detectOtherTroops();
-  },1000);
+  const s = new Date().getSeconds();
+  if (placeOn  && s === placeSec) {
+    const dome = parseInt($('#as-dome').val(), 10);
+    const tdc  = parseInt($('#as-tdc').val(), 10);
+    performReplaceAntisonde(dome, tdc);
+  }
+  if (detectOn && s === detectSec) detectOtherTroops();
+}, 1000);
+
 })();
