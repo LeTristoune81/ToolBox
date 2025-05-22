@@ -23,10 +23,3 @@
 +// @resource     colonieCss https://raw.githubusercontent.com/LeTristoune81/ToolBox/main/css/colonie.css
 +// @resource     toolboxCss https://raw.githubusercontent.com/LeTristoune81/ToolBox/main/css/toolbox.css
 // ==/UserScript==
-
-  (function(){
-  'use strict';
-
-+  // ─── Injecter les CSS externes ────────────────────────────────────
-+  GM_addStyle( GM_getResourceText('colonieCss') );
-+  GM_addStyle( GM_getResourceText('toolboxCss') );
