@@ -1,3 +1,51 @@
+// ─── CSS Colonies ───────────────────────────────────────────────────────────
+const cssCol = `
+  .colonies_zzzelp {
+    text-align: left;
+    padding-left: 15%;
+    padding-bottom: 10px;
+  }
+  .ligne_colonies_zzzelp {
+    width: 30%;
+    line-height: 2.3em;
+    display: inline-block;
+  }
+  @media (max-width: 976px) {
+    .ligne_colonies_zzzelp { width: 45%; }
+  }
+  @media (max-width: 600px) {
+    .ligne_colonies_zzzelp { width: 90%; }
+  }
+  .boite_membre.colonies_zzzelp_box {
+    margin: auto;
+    border: 1px solid;
+    background-color: #d7c384;
+    padding: 5px;
+    margin-bottom: 20px;
+  }
+`;
+
+// ─── CSS Toolbox Icons & Text ────────────────────────────────────────────────
+const cssTool = `
+  #toolbox .contenu_boite_compte_plus ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 4px 0;
+  }
+  #toolbox .contenu_boite_compte_plus ul li a .icon {
+    position: absolute;
+    left: 12px;
+  }
+`;
+
+// On injecte immédiatement ces styles dans le <head>
+$('<style>')
+  .text(cssCol + "\n" + cssTool)
+  .appendTo('head');
+
+
 /**
  * Module UI: injection de la ToolBox et du panneau de paramètres
  */
