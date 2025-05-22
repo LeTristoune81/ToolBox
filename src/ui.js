@@ -13,7 +13,11 @@ function injectToolbox(version, asDome, asTdc, placeOn, placeSec, detectOn, dete
       </div>
     </div>`).appendTo('body');
   $('#tool-params').on('click', togglePanel);
-  $('#tool-replace').on('click', ()=>performReplaceAntisonde(asDome,asTdc));
+  $('#tool-replace').on('click', () => {
+  const dome = parseInt($('#as-dome').val(), 10);
+  const tdc  = parseInt($('#as-tdc').val(), 10);
+  performReplaceAntisonde(dome, tdc);
+});
   $('#tool-colonies').on('click', e=>{e.preventDefault(); toggleColoniesBox();});
 }
 
