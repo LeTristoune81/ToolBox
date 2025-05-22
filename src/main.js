@@ -1,37 +1,47 @@
-// point d’entrée
+// Point d’entrée principal
 (function(){
   'use strict';
 
-  // récupération des settings
+  // Lecture initiale (pour l’affichage du panel)
   const version = GM_info.script.version;
-  const H         = location.host.replace(/[.:]/g,'_');
-  const K_AS_DOME = H+'_as_dome', K_AS_TDC=H+'_as_tdc', K_PS=H+'_auto_place_sec';
-  const K_DS=H+'_auto_detect_sec', K_PE=H+'_auto_place_on', K_DE=H+'_auto_detect_on';
-  const K_WH=H+'_discord_wh';
+  const H       = location.host.replace(/[.:]/g, '_');
+  const K_AS_DOME = H+'_as_dome', K_AS_TDC=H+'_as_tdc';
+  const K_PS  = H+'_auto_place_sec', K_DS  = H+'_auto_detect_sec';
+  const K_PE  = H+'_auto_place_on',  K_DE  = H+'_auto_detect_on';
+  const K_WH  = H+'_discord_wh';
 
-  let asDome=+localStorage.getItem(K_AS_DOME)||5,
-      asTdc=+localStorage.getItem(K_AS_TDC)||1,
-      placeSec=+localStorage.getItem(K_PS)||0,
-      detectSec=+localStorage.getItem(K_DS)||30,
-      placeOn=localStorage.getItem(K_PE)==='true',
-      detectOn=localStorage.getItem(K_DE)==='true',
-      webhook=localStorage.getItem(K_WH)||'';
+  const asDome   = +localStorage.getItem(K_AS_DOME)||5;
+  const asTdc    = +localStorage.getItem(K_AS_TDC)||1;
+  const placeSec = +localStorage.getItem(K_PS)||0;
+  const detectSec= +localStorage.getItem(K_DS)||30;
+  const placeOn  = localStorage.getItem(K_PE)==='true';
+  const detectOn = localStorage.getItem(K_DE)==='true';
+  const webhook  = localStorage.getItem(K_WH)||'';
 
-  // initialisation UI
-  injectToolbox(version,asDome,asTdc,placeOn,placeSec,detectOn,detectSec,webhook);
-  createPanel(asDome,asTdc,placeOn,placeSec,detectOn,detectSec,webhook);
+  // Initialise l’UI
+  injectToolbox(version);
+  createPanel(asDome, asTdc, placeOn, placeSec, detectOn, detectSec, webhook);
   enhanceProfile();
 
-  // boucles
-  setInterval(()=>{ injectToolbox(); createPanel(); enhanceProfile(); },500);
+  // Boucle d’injection régulière
   setInterval(()=>{
-  const s = new Date().getSeconds();
-  if (placeOn  && s === placeSec) {
-    const dome = parseInt($('#as-dome').val(), 10);
-    const tdc  = parseInt($('#as-tdc').val(), 10);
-    performReplaceAntisonde(dome, tdc);
-  }
-  if (detectOn && s === detectSec) detectOtherTroops();
-}, 1000);
+    injectToolbox(version);
+    createPanel(asDome, asTdc, placeOn, placeSec, detectOn, detectSec, webhook);
+    enhanceProfile();
+  }, 500);
+
+  // Boucle de trigger automatique
+  setInterval(()=>{
+    const s = new Date().getSeconds();
+
+    if (placeOn && s === +$('#place-sec').val()) {
+      const dome = +$('#as-dome').val()  || 0;
+      const tdc  = +$('#as-tdc').val()   || 0;
+      performReplaceAntisonde(dome, tdc);
+    }
+    if (detectOn && s === +$('#detect-sec').val()) {
+      detectOtherTroops();
+    }
+  }, 1000);
 
 })();
