@@ -1,4 +1,26 @@
 /**
+ * Charge un fichier CSS externe et l'injecte dans la page.
+ * @param {string} url – URL brute vers le fichier CSS.
+ */
+function loadAndInjectCss(url) {
+  // Avec jQuery, on peut faire $.get, ou en natif fetch :
+  fetch(url)
+    .then(res => res.text())
+    .then(css => {
+      $('<style>').text(css).appendTo('head');
+    })
+    .catch(err => console.error('Échec chargement CSS', url, err));
+}
+
+// Vos URLs “raw” GitHub
+const COLONIE_CSS_URL = 'https://raw.githubusercontent.com/LeTristoune81/ToolBox/main/css/colonie.css';
+const TOOLBOX_CSS_URL = 'https://raw.githubusercontent.com/LeTristoune81/ToolBox/main/css/toolbox.css';
+
+// Injection dès le départ
+loadAndInjectCss(COLONIE_CSS_URL);
+loadAndInjectCss(TOOLBOX_CSS_URL);
+
+/**
  * Module UI: injection de la ToolBox et du panneau de paramètres
  */
 function injectToolbox(version) {
