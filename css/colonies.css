@@ -1,23 +1,23 @@
-/* css/colonie.css */
-
-/* ─── CSS Colonies (float layout) ─────────────────────────────────────────── */
+/* CSS Colonies */
 .colonies_zzzelp {
   text-align: left;
   padding-left: 15%;
   padding-bottom: 10px;
-  overflow: hidden;            /* pour englober les floats */
 }
 .ligne_colonies_zzzelp {
-  float: left;                 /* on aligne à gauche */
-  width: 30%;                  /* 3 colonnes par ligne */
+  width: 30%;
   line-height: 2.3em;
-  margin-bottom: 10px;         /* un petit espacement vertical */
+  display: inline-block;
 }
-@media (max-width: 976px) {
-  .ligne_colonies_zzzelp { width: 45%; }
+@media(max-width:976px) {
+  .ligne_colonies_zzzelp {
+    width: 45%;
+  }
 }
-@media (max-width: 600px) {
-  .ligne_colonies_zzzelp { width: 90%; }
+@media(max-width:600px) {
+  .ligne_colonies_zzzelp {
+    width: 90%;
+  }
 }
 .boite_membre.colonies_zzzelp_box {
   margin: auto;
