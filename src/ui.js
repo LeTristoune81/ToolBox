@@ -1,28 +1,8 @@
 /**
- * Charge un fichier CSS externe et l'injecte dans la page.
- * @param {string} url – URL brute vers le fichier CSS.
- */
-function loadAndInjectCss(url) {
-  // Avec jQuery, on peut faire $.get, ou en natif fetch :
-  fetch(url)
-    .then(res => res.text())
-    .then(css => {
-      $('<style>').text(css).appendTo('head');
-    })
-    .catch(err => console.error('Échec chargement CSS', url, err));
-}
-
-// Vos URLs “raw” GitHub
-const COLONIE_CSS_URL = 'https://raw.githubusercontent.com/LeTristoune81/ToolBox/main/css/colonie.css';
-const TOOLBOX_CSS_URL = 'https://raw.githubusercontent.com/LeTristoune81/ToolBox/main/css/toolbox.css';
-
-// Injection dès le départ
-loadAndInjectCss(COLONIE_CSS_URL);
-loadAndInjectCss(TOOLBOX_CSS_URL);
-
-/**
+ * src/ui.js
  * Module UI: injection de la ToolBox et du panneau de paramètres
  */
+
 function injectToolbox(version) {
   if ($('#toolbox').length) return;
 
@@ -52,35 +32,35 @@ function injectToolbox(version) {
     </div>
   `).appendTo('body');
 
+  // Ouvre/ferme le panneau de paramètres
   $('#tool-params').on('click', togglePanel);
 
-  // Sur clic, relit dynamiquement les deux champs
+  // Bouton “Replacer Antisonde”
   $('#tool-replace').on('click', e => {
     e.preventDefault();
-    const dome = parseInt($('#as-dome').val(), 10) || 0;
-    const tdc  = parseInt($('#as-tdc').val(), 10)  || 0;
+    const dome = parseInt($('#as-dome').val(),  10) || 0;
+    const tdc  = parseInt($('#as-tdc').val(),  10) || 0;
     performReplaceAntisonde(dome, tdc);
   });
 
+  // Bouton “Colonies”
   $('#tool-colonies').on('click', e => {
     e.preventDefault();
     toggleColoniesBox();
   });
 }
 
-
 function createPanel() {
   if ($('#fourmizzz-panel').length) return;
 
-  // Relit tout dynamiquement depuis localStorage
   const H         = location.host.replace(/[.:]/g,'_');
-  const asDome    = +localStorage.getItem(H + '_as_dome')        || 5;
-  const asTdc     = +localStorage.getItem(H + '_as_tdc')         || 1;
-  const placeSec  = +localStorage.getItem(H + '_auto_place_sec') || 0;
-  const detectSec = +localStorage.getItem(H + '_auto_detect_sec')||30;
-  const placeOn   = localStorage.getItem(H + '_auto_place_on')   === 'true';
-  const detectOn  = localStorage.getItem(H + '_auto_detect_on')  === 'true';
-  const webhook   = localStorage.getItem(H + '_discord_wh')      || '';
+  const asDome    = +localStorage.getItem(H + '_as_dome')         || 5;
+  const asTdc     = +localStorage.getItem(H + '_as_tdc')          || 1;
+  const placeSec  = +localStorage.getItem(H + '_auto_place_sec')  || 0;
+  const detectSec = +localStorage.getItem(H + '_auto_detect_sec') || 30;
+  const placeOn   = localStorage.getItem(H + '_auto_place_on')    === 'true';
+  const detectOn  = localStorage.getItem(H + '_auto_detect_on')   === 'true';
+  const webhook   = localStorage.getItem(H + '_discord_wh')       || '';
 
   $(`<div id="fourmizzz-panel" style="
         position:fixed; top:400px; right:45px;
@@ -110,37 +90,35 @@ function createPanel() {
         Auto-Détection (sec <input id="detect-sec" type="number" min="0" max="59" value="${detectSec}" style="width:50px;">)
       </label>
     </div>`).appendTo('body')
-    // À chaque modification, on écrit la bonne clé
-    .find('#as-dome').on('input',    e=>{
-      const key = location.host.replace(/[.:]/g,'_') + '_as_dome';
+    .find('#as-dome').on('input',    e => {
+      const key = `${H}_as_dome`;
       localStorage.setItem(key, +e.target.value);
     })
-    .end().find('#as-tdc').on('input', e=>{
-      const key = location.host.replace(/[.:]/g,'_') + '_as_tdc';
+    .end().find('#as-tdc').on('input', e => {
+      const key = `${H}_as_tdc`;
       localStorage.setItem(key, +e.target.value);
     })
-    .end().find('#discord-webhook').on('change', e=>{
-      const key = location.host.replace(/[.:]/g,'_') + '_discord_wh';
+    .end().find('#discord-webhook').on('change', e => {
+      const key = `${H}_discord_wh`;
       localStorage.setItem(key, e.target.value);
     })
-    .end().find('#place-on').on('change', e=>{
-      const key = location.host.replace(/[.:]/g,'_') + '_auto_place_on';
+    .end().find('#place-on').on('change', e => {
+      const key = `${H}_auto_place_on`;
       localStorage.setItem(key, e.target.checked);
     })
-    .end().find('#place-sec').on('input',  e=>{
-      const key = location.host.replace(/[.:]/g,'_') + '_auto_place_sec';
+    .end().find('#place-sec').on('input',  e => {
+      const key = `${H}_auto_place_sec`;
       localStorage.setItem(key, +e.target.value);
     })
-    .end().find('#detect-on').on('change', e=>{
-      const key = location.host.replace(/[.:]/g,'_') + '_auto_detect_on';
+    .end().find('#detect-on').on('change', e => {
+      const key = `${H}_auto_detect_on`;
       localStorage.setItem(key, e.target.checked);
     })
-    .end().find('#detect-sec').on('input', e=>{
-      const key = location.host.replace(/[.:]/g,'_') + '_auto_detect_sec';
+    .end().find('#detect-sec').on('input', e => {
+      const key = `${H}_auto_detect_sec`;
       localStorage.setItem(key, +e.target.value);
     });
 }
-
 
 function togglePanel() {
   $('#fourmizzz-panel').toggle();
