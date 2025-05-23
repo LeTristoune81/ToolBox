@@ -1,20 +1,21 @@
-/* CSS Colonies */
+/* css/colonie.css */
+/* ─── CSS Colonies (version inline-block d’origine) ─────────────────────────── */
 .colonies_zzzelp {
   text-align: left;
   padding-left: 15%;
   padding-bottom: 10px;
 }
 .ligne_colonies_zzzelp {
+  display: inline-block;
   width: 30%;
   line-height: 2.3em;
-  display: inline-block;
 }
-@media(max-width:976px) {
+@media (max-width: 976px) {
   .ligne_colonies_zzzelp {
     width: 45%;
   }
 }
-@media(max-width:600px) {
+@media (max-width: 600px) {
   .ligne_colonies_zzzelp {
     width: 90%;
   }
