@@ -1,25 +1,33 @@
 /* css/colonie.css */
-/* ─── CSS Colonies (version inline-block d’origine) ─────────────────────────── */
+/* Container : centre horizontalement les blocs */
 .colonies_zzzelp {
-  text-align: left;
-  padding-left: 15%;
+  text-align: center;
   padding-bottom: 10px;
 }
+/* Chaque item */
 .ligne_colonies_zzzelp {
   display: inline-block;
-  width: 30%;
-  line-height: 2.3em;
+  vertical-align: top;
+  width: 33.3333%;       /* 3 colonnes égales */
+  box-sizing: border-box;
+  padding: 0 5px;        /* petit espace latéral */
+  margin-bottom: 10px;   /* espacement vertical */
+  text-align: left;      /* texte aligné à gauche dans chaque bloc */
+  line-height: 1.4em;
 }
+/* Responsive */
 @media (max-width: 976px) {
   .ligne_colonies_zzzelp {
-    width: 45%;
+    width: 45%;          /* 2 colonnes */
   }
 }
 @media (max-width: 600px) {
   .ligne_colonies_zzzelp {
-    width: 90%;
+    width: 90%;          /* 1 colonne */
+    padding: 0;
   }
 }
+/* Style du conteneur global */
 .boite_membre.colonies_zzzelp_box {
   margin: auto;
   border: 1px solid;
