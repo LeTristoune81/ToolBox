@@ -30,7 +30,7 @@ function injectToolbox(version) {
     <div id="toolbox" class="boite_compte_plus" style="
       position:fixed; top:100px; right:100px;
       width:190px; background:#525543;
-      border-radius:4px; font:13px Arial,sans-serif;
+      border-radius:4px; font:16px Arial,sans-serif;
       color:#d3d9b8; text-align:center; z-index:1000;
     ">
       <div class="titre_colonne_cliquable" style="font-size:16px;">
